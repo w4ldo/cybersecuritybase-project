@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Sign up form</title>
+        <title>Note form</title>
     </head>
     <body>
 
-        <h1>Sign up to the event using this form</h1>
+        <a href='/login'>Back</a>
 
-        <form action="#" th:action="@{/form}" method="POST">
-            <p><label for="name">Name</label>: <input type="text" name="name" id="name"/></p>
-            <p><label for="address">Address</label>: <input type="text" name="address" id="address"/></p>
+        <h1>Write a note</h1>
+
+        <form action="#" th:action="@{/notes}" method="POST">
+            <p><label for="title">Title</label>: <input type="text" name="title" id="title"/></p>
+            <p><label for="content">Content</label>: <input type="text" name="content" id="content"/></p>
             <p><input type="submit" value="Submit" /></p>
+        </form>
+
+        <h1>Notes:</h1>
+
+        <ul>
+            <li th:each="note : ${notes}">
+                <a th:href="@{'/notes/' + ${note.id}}">
+                    <span th:text="${note.title}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <form action="#" th:action="@{/delete}" method="POST">
+            <p><input disabled="true" type="submit" value="DELETE" /> disabled in production</p>
         </form>
 
         <p></p>
